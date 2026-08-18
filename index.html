@@ -108,33 +108,6 @@
       gap: 14px;
     }
 
-    .file-box {
-      border: 1.5px dashed #c7cdd4;
-      border-radius: 12px;
-      padding: 18px;
-      text-align: center;
-      background: #fafbfc;
-    }
-
-    .file-box label {
-      cursor: pointer;
-      margin-bottom: 6px;
-    }
-
-    .file-box p {
-      font-size: 12px;
-      color: #7b8490;
-      margin-bottom: 12px;
-    }
-
-    input[type="file"] {
-      height: auto;
-      border: none;
-      padding: 0;
-      font-size: 14px;
-      background: transparent;
-    }
-
     .submit-btn {
       width: 100%;
       border: none;
@@ -165,7 +138,6 @@
     }
 
     @media (max-width: 520px) {
-
       body {
         padding: 16px 12px;
         align-items: flex-start;
@@ -219,7 +191,6 @@
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
-        enctype="multipart/form-data"
         action="/koszonjuk.html"
       >
 
@@ -236,21 +207,18 @@
           <label for="location">
             Telephely <span class="required">*</span>
           </label>
-
           <select id="location" name="telephely" required>
             <option value="" disabled selected>Válassz telephelyet</option>
-            <option value="Telephely 1">Hatvan</option>
-            <option value="Telephely 2">Eger</option>
-            <option value="Telephely 3">Gyöngyös</option>
+            <option value="Telephely 1">Telephely 1</option>
+            <option value="Telephely 2">Telephely 2</option>
+            <option value="Telephely 3">Telephely 3</option>
           </select>
         </div>
-
 
         <div class="field">
           <label for="customer">
             Vevőkód <span class="required">*</span>
           </label>
-
           <input
             id="customer"
             name="vevokod"
@@ -261,12 +229,10 @@
           >
         </div>
 
-
         <div class="field">
           <label for="date">
             Mikor rendelted? <span class="required">*</span>
           </label>
-
           <input
             id="date"
             name="rendeles_datum"
@@ -275,12 +241,24 @@
           >
         </div>
 
+        <!-- ÚJ MEZŐ: Honnan rendelted? -->
+        <div class="field">
+          <label for="source">
+            Honnan rendelted? <span class="required">*</span>
+          </label>
+          <select id="source" name="rendeles_helye" required>
+            <option value="" disabled selected>Válassz...</option>
+            <option value="Telephelyről">Telephelyről</option>
+            <option value="Központból">Központból</option>
+            <option value="Lengyelből">Lengyelből</option>
+            <option value="2 napos lengyel">2 napos lengyel</option>
+          </select>
+        </div>
 
         <div class="field">
           <label for="part">
             Cikkszám <span class="required">*</span>
           </label>
-
           <input
             id="part"
             name="cikkszam"
@@ -291,12 +269,10 @@
           >
         </div>
 
-
         <div class="field">
           <label for="qty">
             Darabszám <span class="required">*</span>
           </label>
-
           <input
             id="qty"
             name="darabszam"
@@ -307,29 +283,6 @@
             required
           >
         </div>
-
-
-        <div class="field">
-
-          <div class="file-box">
-
-            <label for="screenshot">
-              📎 Képernyőfotó csatolása
-            </label>
-
-            <p>Nem kötelező • maximum 8 MB</p>
-
-            <input
-              id="screenshot"
-              name="kepernyofoto"
-              type="file"
-              accept="image/*"
-            >
-
-          </div>
-
-        </div>
-
 
         <button type="submit" class="submit-btn">
           Bejelentés elküldése
