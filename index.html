@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>D-Ticket | Hiányzó alkatrész bejelentése</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #18212b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-name {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #111827;
+    }
+
+    .brand-name span {
+      color: #2563eb;
+    }
+
+    .brand-subtitle {
+      margin-top: 6px;
+      color: #6b7280;
+      font-size: 15px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-size: 22px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 26px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 52px;
+      border: 1px solid #d6dbe1;
+      border-radius: 11px;
+      padding: 0 14px;
+      font-size: 16px;
+      background: #fff;
+      color: #111827;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .file-box {
+      border: 1.5px dashed #c7cdd4;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      background: #fafbfc;
+    }
+
+    .file-box label {
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .file-box p {
+      font-size: 12px;
+      color: #7b8490;
+      margin-bottom: 12px;
+    }
+
+    input[type="file"] {
+      height: auto;
+      border: none;
+      padding: 0;
+      font-size: 14px;
+      background: transparent;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #111827;
+      color: white;
+      height: 56px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #2563eb;
+    }
+
+    .privacy {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 12px;
+      color: #9aa1aa;
+    }
+
+    .required {
+      color: #dc2626;
+    }
+
+    @media (max-width: 520px) {
+
+      body {
+        padding: 16px 12px;
+        align-items: flex-start;
+      }
+
+      .brand {
+        margin-top: 12px;
+        margin-bottom: 18px;
+      }
+
+      .brand-name {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 16px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <div class="brand">
+      <div class="brand-name">D<span>-</span>Ticket</div>
+      <div class="brand-subtitle">Gyors szállítási problémajelzés</div>
+    </div>
+
+    <section class="card">
+
+      <h1>Hiányzó alkatrész bejelentése</h1>
+
+      <p class="intro">
+        Add meg a rendelés adatait. A bejelentés néhány másodperc alatt elküldhető.
+      </p>
+
+      <form
+        name="missing-part"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
+        action="/koszonjuk.html"
+      >
+
+        <input type="hidden" name="form-name" value="missing-part">
+
+        <p style="display:none;">
+          <label>
+            Ne töltsd ki:
+            <input name="bot-field">
+          </label>
+        </p>
+
+        <div class="field">
+          <label for="location">
+            Telephely <span class="required">*</span>
+          </label>
+
+          <select id="location" name="telephely" required>
+            <option value="" disabled selected>Válassz telephelyet</option>
+            <option value="Telephely 1">Telephely 1</option>
+            <option value="Telephely 2">Telephely 2</option>
+            <option value="Telephely 3">Telephely 3</option>
+          </select>
+        </div>
+
+
+        <div class="field">
+          <label for="customer">
+            Vevőkód <span class="required">*</span>
+          </label>
+
+          <input
+            id="customer"
+            name="vevokod"
+            type="text"
+            placeholder="Pl. 123456"
+            autocomplete="off"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="date">
+            Mikor rendelted? <span class="required">*</span>
+          </label>
+
+          <input
+            id="date"
+            name="rendeles_datum"
+            type="date"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="part">
+            Cikkszám <span class="required">*</span>
+          </label>
+
+          <input
+            id="part"
+            name="cikkszam"
+            type="text"
+            placeholder="Hiányzó alkatrész cikkszáma"
+            autocomplete="off"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="qty">
+            Darabszám <span class="required">*</span>
+          </label>
+
+          <input
+            id="qty"
+            name="darabszam"
+            type="number"
+            min="1"
+            value="1"
+            inputmode="numeric"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+
+          <div class="file-box">
+
+            <label for="screenshot">
+              📎 Képernyőfotó csatolása
+            </label>
+
+            <p>Nem kötelező • maximum 8 MB</p>
+
+            <input
+              id="screenshot"
+              name="kepernyofoto"
+              type="file"
+              accept="image/*"
+            >
+
+          </div>
+
+        </div>
+
+
+        <button type="submit" class="submit-btn">
+          Bejelentés elküldése
+        </button>
+
+        <div class="privacy">
+          A megadott adatokat kizárólag a szállítási probléma kivizsgálásához használjuk.
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
