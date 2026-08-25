@@ -147,6 +147,11 @@
       background: #2563eb;
     }
 
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
     .privacy {
       text-align: center;
       margin-top: 14px;
@@ -204,6 +209,7 @@
       </p>
 
       <form
+        id="dticket-form"
         name="missing-part"
         method="POST"
         data-netlify="true"
@@ -327,7 +333,7 @@
           </div>
         </div>
 
-        <button type="submit" class="submit-btn">
+        <button id="submit-btn" type="submit" class="submit-btn">
           Bejelentés elküldése
         </button>
 
@@ -342,9 +348,49 @@
   </main>
 
   <script>
+    const GOOGLE_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxXI_g5g52-wEMcbS_Erlc-RVk74h0lpwz3-k3Xphm_8yWmLaGpFw2ReqD02NIOj8pn/exec";
+
+    const form = document.getElementById("dticket-form");
+    const submitButton = document.getElementById("submit-btn");
     const dateInput = document.getElementById("date");
+
     const today = new Date().toISOString().split("T")[0];
     dateInput.max = today;
+
+    form.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Küldés...";
+
+      const payload = {
+        telephely: form.elements["telephely"].value,
+        vevokod: form.elements["vevokod"].value,
+        rendeles_datum: form.elements["rendeles_datum"].value,
+        rendeles_helye: form.elements["rendeles_forrasa"].value,
+        cikkszam: form.elements["cikkszam"].value,
+        darabszam: form.elements["darabszam"].value
+      };
+
+      try {
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+      } catch (error) {
+        console.error("Google Sheets hiba:", error);
+      }
+
+      form.submit();
+    });
   </script>
 
 </body>
