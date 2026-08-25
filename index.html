@@ -102,10 +102,31 @@
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+    .file-box {
+      border: 1.5px dashed #c7cdd4;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      background: #fafbfc;
+    }
+
+    .file-box label {
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .file-box p {
+      font-size: 12px;
+      color: #7b8490;
+      margin-bottom: 12px;
+    }
+
+    input[type="file"] {
+      height: auto;
+      border: none;
+      padding: 0;
+      font-size: 14px;
+      background: transparent;
     }
 
     .submit-btn {
@@ -131,6 +152,7 @@
       margin-top: 14px;
       font-size: 12px;
       color: #9aa1aa;
+      line-height: 1.4;
     }
 
     .required {
@@ -157,11 +179,6 @@
         border-radius: 16px;
       }
 
-      .row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
       h1 {
         font-size: 20px;
       }
@@ -183,7 +200,7 @@
       <h1>Hiányzó alkatrész bejelentése</h1>
 
       <p class="intro">
-        Add meg a rendelés adatait. A bejelentés néhány másodperc alatt elküldhető.
+        Add meg a hiányzó alkatrész adatait. A bejelentés néhány másodperc alatt elküldhető.
       </p>
 
       <form
@@ -191,6 +208,7 @@
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
         action="/koszonjuk.html"
       >
 
@@ -207,11 +225,12 @@
           <label for="location">
             Telephely <span class="required">*</span>
           </label>
+
           <select id="location" name="telephely" required>
             <option value="" disabled selected>Válassz telephelyet</option>
-            <option value="Telephely 1">Hatvan</option>
-            <option value="Telephely 2">Eger</option>
-            <option value="Telephely 3">Gyöngyös</option>
+            <option value="Hatvan">Hatvan</option>
+            <option value="Eger">Eger</option>
+            <option value="Gyöngyös">Gyöngyös</option>
           </select>
         </div>
 
@@ -219,6 +238,7 @@
           <label for="customer">
             Vevőkód <span class="required">*</span>
           </label>
+
           <input
             id="customer"
             name="vevokod"
@@ -233,6 +253,7 @@
           <label for="date">
             Mikor rendelted? <span class="required">*</span>
           </label>
+
           <input
             id="date"
             name="rendeles_datum"
@@ -241,18 +262,18 @@
           >
         </div>
 
-        <!-- ÚJ MEZŐ: Honnan rendelted? -->
         <div class="field">
           <label for="source">
             Honnan rendelted? <span class="required">*</span>
           </label>
-          <select id="source" name="rendeles_helye" required>
+
+          <select id="source" name="rendeles_forrasa" required>
             <option value="" disabled selected>Válassz...</option>
             <option value="Telephelyről">Telephelyről</option>
-            <option value="Központból">Központból ( M06 )</option>
-            <option value="Központból">Gumiraktár ( M09 )</option>
-            <option value="Lengyelből">Lengyelből (HSN)</option>
-            <option value="2 napos lengyel">2 napos lengyel(HZA)</option>
+            <option value="Központ M06">Központból (M06)</option>
+            <option value="Gumiraktár M09">Gumiraktár (M09)</option>
+            <option value="Lengyel HSN">Lengyelből (HSN)</option>
+            <option value="2 napos lengyel HZA">2 napos lengyel (HZA)</option>
           </select>
         </div>
 
@@ -260,6 +281,7 @@
           <label for="part">
             Cikkszám <span class="required">*</span>
           </label>
+
           <input
             id="part"
             name="cikkszam"
@@ -274,6 +296,7 @@
           <label for="qty">
             Darabszám <span class="required">*</span>
           </label>
+
           <input
             id="qty"
             name="darabszam"
@@ -283,6 +306,25 @@
             inputmode="numeric"
             required
           >
+        </div>
+
+        <div class="field">
+          <div class="file-box">
+
+            <label for="screenshot">
+              📎 Képernyőfotó csatolása
+            </label>
+
+            <p>Nem kötelező</p>
+
+            <input
+              id="screenshot"
+              name="kepernyofoto"
+              type="file"
+              accept="image/*"
+            >
+
+          </div>
         </div>
 
         <button type="submit" class="submit-btn">
@@ -298,6 +340,12 @@
     </section>
 
   </main>
+
+  <script>
+    const dateInput = document.getElementById("date");
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.max = today;
+  </script>
 
 </body>
 </html>
